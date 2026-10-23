@@ -38,6 +38,7 @@ compactor:
 
 limits_config:
   retention_period: 168h
+  deletion_mode: disabled
   otlp_config:
     resource_attributes:
       ignore_defaults: true

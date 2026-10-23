@@ -1,6 +1,12 @@
-ARG VERSION=11.5.2
+ARG VERSION=13.2.4
 
-FROM grafana/grafana-oss:${VERSION}
+FROM grafana/grafana:${VERSION}
+
+ENV GOMEMLIMIT=150MiB \
+    GF_ANALYTICS_REPORTING_ENABLED=false \
+    GF_ANALYTICS_CHECK_FOR_UPDATES=false \
+    GF_ANALYTICS_CHECK_FOR_PLUGIN_UPDATES=false \
+    GF_PLUGINS_DISABLE_PLUGINS=alertmanager,cloudwatch,elasticsearch,grafana-advisor-app,grafana-azure-monitor-datasource,grafana-postgresql-datasource,grafana-pyroscope-app,grafana-pyroscope-datasource,grafana-testdata-datasource,graphite,influxdb,jaeger,mssql,mysql,opentsdb,stackdriver,zipkin
 
 # copy the datasources and dashboards
 COPY datasources /etc/grafana/provisioning/datasources

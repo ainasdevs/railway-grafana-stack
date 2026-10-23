@@ -1,21 +1,10 @@
-global:
-  scrape_interval: 15s # Default scrape interval
+otlp:
+  promote_resource_attributes:
+    - deployment.environment.name
 
-scrape_configs:
-  - job_name: 'prometheus'
-    static_configs:
-      - targets: ['localhost:9090']
-
-  # - job_name: 'example_api'
-  #   scheme: http
-  #   static_configs:
-  #     - targets: ['example_api:9091']
-
-  #  ? TODO: add your services here
-  # - job_name: 'your-job-name'
-  #   scheme: https
-  #   static_configs:
-  #     - targets: ['URL_GOES_HERE']
-  #   basic_auth:
-  #     username: HTTP_AUTH_USERNAME_GOES_HERE
-  #     password: HTTP_AUTH_PASSWORD_GOES_HERE
+storage:
+  tsdb:
+    out_of_order_time_window: 30m
+    retention:
+      time: 15d
+      size: 3GB

@@ -1,5 +1,15 @@
+stream_over_http_enabled: true
+
 server:
   http_listen_port: 3200
+  log_level: warn
+
+distributor:
+  receivers:
+    otlp:
+      protocols:
+        http:
+          endpoint: "[::]:4318"
 
 storage:
   trace:
@@ -7,13 +17,10 @@ storage:
     local:
       path: /var/tempo/traces
 
-distributor:
-  log_received_spans:
-        enabled: true
-  receivers:
-    otlp:
-      protocols:
-        grpc:
-          endpoint: "0.0.0.0:4317"
-        http:
-          endpoint: "0.0.0.0:4318"
+overrides:
+  defaults:
+    compaction:
+      block_retention: 72h
+
+usage_report:
+  reporting_enabled: false

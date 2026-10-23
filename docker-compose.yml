@@ -29,7 +29,6 @@ services:
     user: root # required for data persistence
     ports:
       - "3200:3200" # http server for querying
-      - "4317:4317" # grpc server for ingest
       - "4318:4318" # http server for ingest
     volumes:
       - tempo_data:/var/tempo
@@ -46,7 +45,6 @@ services:
       - GF_SECURITY_ADMIN_USER=admin
       - GF_SECURITY_ADMIN_PASSWORD=yourpassword123
       - GF_DEFAULT_INSTANCE_NAME=Grafana
-      - GF_INSTALL_PLUGINS=grafana-simple-json-datasource,grafana-piechart-panel,grafana-worldmap-panel,grafana-clock-panel
       - LOKI_INTERNAL_URL=http://loki:3100
       - PROMETHEUS_INTERNAL_URL=http://prometheus:9090
       - TEMPO_INTERNAL_URL=http://tempo:3200
